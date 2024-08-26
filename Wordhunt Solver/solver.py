@@ -5,12 +5,10 @@ def create_grid(letters):
         grid.append(list(row))
     return grid
 
-
 def load_words():
     with open("Wordhunt Solver/words.txt", "r") as f:
         words = [line.strip() for line in f]
     return set(words)
-
 
 def find_words(grid, words):
     results = []
@@ -20,10 +18,8 @@ def find_words(grid, words):
                 if grid[i][j] == word[0]:
                     if check_word(grid, word, i, j, set()):
                         results.append(word)
-    # sort the results by word length in descending order
     results.sort(key=lambda x: len(x), reverse=True)
     return results
-
 
 def check_word(grid, word, x, y, visited):
     if not word:
@@ -44,29 +40,20 @@ def check_word(grid, word, x, y, visited):
     visited.remove((x, y))
     return False
 
-
-# Get user input
 print("")
+
 letters = input("Enter your letters here: ")
 grid = create_grid(letters)
-
-# Load words from a dictionary file
 words = load_words()
-
-# Find words in the grid
 results = find_words(grid, words)
 
-# Print the results sorted by word length in descending order
 print("Results:")
 if results:
-    # Sort the results by word length in descending order
     results.sort(key=lambda x: len(x), reverse=False)
     for result in results:
         print(result)
 else:
     print("No words found.")
-
-# Print the user input grid
 
 print("")
 print("↑↑↑↑↑↑ Results ↑↑↑↑↑↑")
